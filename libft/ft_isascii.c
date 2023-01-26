@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2022/10/18 12:56:14 by mmarcott          #+#    #+#             */
 /*   Updated: 2022/11/01 16:07:49 by mmarcott         ###   ########.fr       */
 /*                                                                            */
@@ -18,4 +21,3 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-// testint 

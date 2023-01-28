@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/28 15:28:04 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:45:06 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_error(char *message)
 	ft_printf("Error: %s\n", message);
 }
 
+/* Modify a pixel in an image. */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -59,6 +60,7 @@ int	main(int argc, char **argv)
 	chest.img = mlx_xpm_file_to_image(mlx, "sprites/chest.xpm", &wid, &height);
 	mlx_put_image_to_window(mlx, windows, img.img, 120, 160);
 	mlx_put_image_to_window(mlx, windows, chest.img, 560, 160);
+	ft_printf("X: %d - Y: %d\n", wid, height);
 	mlx_loop(mlx);
 	return (0);
 }

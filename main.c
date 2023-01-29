@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/29 01:58:00 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/29 13:20:00 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_list(t_decors *head, int x, int y)
 	current = head;
 	while (current->next)
 	{
-		if (current->type == 's' && x == current->x && y == current->y)
+		if ((current->type == 's' || current->type == 'c') && x == current->x && y == current->y)
 			return (1);
 		current = current->next;
 	}
@@ -161,7 +161,7 @@ int	main(int argc, char **argv)
 	vars.player = player;
 	sand = init_decor(&vars, "sprites/sand.xpm", 's');
 	water = init_decor(&vars, "sprites/water.xpm", 'w');
-	chest = init_decor(&vars, "sprites/chest.xpm", 'c');
+	chest = init_decor(&vars, "sprites/perso.xpm", 'c');
 	ft_check_map(map, &sand, '1', 's');
 	ft_check_map(map, &water, '0', 'w');
 	ft_check_map(map, &chest, 'C', 'c');

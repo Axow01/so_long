@@ -1,5 +1,5 @@
 
-SRC = main.c check_map.c
+SRC = main.c map_other_functions.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -13,6 +13,7 @@ LIB = libft.a
 
 all: ${LIBD}${LIB} ${NAME}
 
+	@afplay ./maybe.wav
 ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD}
 	${MAKE} -C ${LIBD} bonus
@@ -33,4 +34,6 @@ push: clean
 	@git push origin master
 
 run: all
-	@./so_long "map/default.map"
+	@./so_long map/default.ber
+
+re: fclean all

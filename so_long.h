@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/28 16:26:08 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/28 22:42:39 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,33 @@
 
 # include "libft/libft.h"
 
+typedef struct s_decors
+{
+	void			*img;
+	int				x;
+	int				y;
+	struct t_decors	*next;
+}					t_decors;
+
+typedef struct s_playerpos
+{
+	void			*img;
+	int				x;
+	int				y;
+}					t_playerpos;
+
+typedef struct s_vars
+{
+	void			*mlx;
+	void			*win;
+	void			*img;
+	t_playerpos		player;
+	t_decors		*decors;
+}					t_vars;
+
 /* Prints the error message in the console. */
-void    ft_error(char *message);
+void				ft_error(char *message);
+void				ft_check_map(char *map, t_decors **head, char therm);
+void				add_decors(t_decors **head, void *img, int x, int y);
 
 #endif

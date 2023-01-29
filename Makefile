@@ -1,5 +1,5 @@
 
-SRC = main.c
+SRC = main.c check_map.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -38,4 +38,4 @@ push: clean
 	@git push origin master
 
 run: all
-	@./so_long "default.map"
+	@./so_long "map/default.map"

@@ -6,12 +6,12 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 01:16:49 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/26 16:30:09 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/28 20:17:54 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-//test  fadf
+
 int	read_the_file(int fd, char **buffer, ssize_t *bytes)
 {
 	*buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
@@ -75,7 +75,7 @@ char	*get_next_line(int fd)
 	while (bytes >= BUFFER_SIZE)
 	{
 		read_the_file(fd, &buffer, &bytes);
-		stash[fd] = ft_strjoin(stash[fd], buffer);
+		stash[fd] = ft_strjoingnl(stash[fd], buffer);
 		size_of_stash = ft_strlen(stash[fd]);
 		if (!stash[fd] || bytes < 0 || (bytes <= 0 && !ft_find(stash[fd],
 					bytes)))

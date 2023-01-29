@@ -6,11 +6,10 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/29 00:46:26 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/29 15:21:16 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
 #include "so_long.h"
 
 void	ft_check_map(char *map, t_decors **head, char therm, char type)
@@ -26,7 +25,7 @@ void	ft_check_map(char *map, t_decors **head, char therm, char type)
 	x = 0;
 	y = 0;
 	(void)map;
-	fd = open("map/default.ber", O_RDONLY);
+	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -45,4 +44,13 @@ void	ft_check_map(char *map, t_decors **head, char therm, char type)
 		line = ft_free(line);
 		line = get_next_line(fd);
 	}
+}
+
+void ft_exit(char *message, int error)
+{
+	if (error)
+		ft_printf("%s - Error!", message);
+	else
+		ft_printf("%s", message);	
+	exit(error);
 }

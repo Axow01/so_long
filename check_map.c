@@ -6,14 +6,14 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/28 22:59:38 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/29 00:46:26 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx/mlx.h"
 #include "so_long.h"
 
-void	ft_check_map(char *map, t_decors **head, char therm)
+void	ft_check_map(char *map, t_decors **head, char therm, char type)
 {
 	char	*line;
 	int		fd;
@@ -34,7 +34,7 @@ void	ft_check_map(char *map, t_decors **head, char therm)
 		{
 			if (line[i] == therm || (therm == '0' && line[i] == 'C'))
 			{
-				add_decors(head, (*head)->img, x, y);
+				add_decors(head, (*head)->img, x, y, type);
 			}
 			x += 100;
 			i++;

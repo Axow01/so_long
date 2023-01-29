@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/28 23:05:34 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/29 01:16:25 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ void	place_decor(t_decors *decs, t_vars *valeur)
 	mlx = valeur->mlx;
 	win = valeur->win;
 	mlx_put_image_to_window(mlx, win, current->img, current->x, current->y);
-	ft_printf("reaching step one");
 	current = current->next;
 	while (current)
 	{
-		ft_printf("X: %d Y: %d\n", current->x, current->y);
 		mlx_put_image_to_window(mlx, win, current->img, current->x, current->y);
 		if (current->next == NULL)
 			return ;
@@ -40,32 +38,50 @@ void	place_decor(t_decors *decs, t_vars *valeur)
 	}
 }
 
+int	check_list(t_decors *head, int x, int y)
+{
+	t_decors	*current;
+
+	current = head;
+	while (current->next)
+	{
+		if (current->type == 's' && x == current->x && y == current->y)
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
+
+void	move_player(t_vars *vars, int xmodifier, int ymodifier)
+{
+	if (!check_list(vars->decors, vars->player.x + xmodifier, vars->player.y
+			+ ymodifier))
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->player.x
+				+= xmodifier, vars->player.y += ymodifier);
+	}
+	else
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->player.x,
+				vars->player.y);
+	}
+}
+
 int	key_pressed(int keycode, t_vars *vars)
 {
-	int	speed;
 	int	modifier;
 
-	speed = 30;
-	modifier = 1;
 	modifier = 100;
-	ft_printf("%d\n", keycode);
 	mlx_clear_window(vars->mlx, vars->win);
 	place_decor(vars->decors, vars);
 	if (keycode == 2) // d
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->player.x
-				+= modifier, vars->player.y);
+		move_player(vars, 100, 0);
 	else if (keycode == 1) // s
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->player.x,
-				vars->player.y += modifier);
+		move_player(vars, 0, 100);
 	else if (keycode == 0) // a
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->player.x
-				-= modifier, vars->player.y);
+		move_player(vars, -100, 0);
 	else if (keycode == 13)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->player.x,
-				vars->player.y -= modifier);
-	else if (keycode == 15)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img,
-				vars->player.x = 10, vars->player.y = 10);
+		move_player(vars, 0, -100);
 	else if (keycode == 53)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -77,7 +93,7 @@ int	key_pressed(int keycode, t_vars *vars)
 	return (0);
 }
 
-void	add_decors(t_decors **head, void *img, int x, int y)
+void	add_decors(t_decors **head, void *img, int x, int y, char type)
 {
 	t_decors	*newbitch;
 	t_decors	*current;
@@ -87,6 +103,7 @@ void	add_decors(t_decors **head, void *img, int x, int y)
 	newbitch->img = img;
 	newbitch->x = x;
 	newbitch->y = y;
+	newbitch->type = type;
 	newbitch->next = NULL;
 	while (current->next)
 		current = current->next;
@@ -99,7 +116,9 @@ void	add_end_list(t_decors **head, t_decors *ajout)
 
 	current = *head;
 	while (current->next)
+	{
 		current = current->next;
+	}
 	current->next = ajout;
 }
 
@@ -118,7 +137,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_error("You failed to provide args, -> ./so_long <map>"), 1);
 	map = argv[1];
-	vars.decors = sand;
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1900, 1000, "Le chien marin");
 	player.img = mlx_xpm_file_to_image(vars.mlx, "sprites/character.xpm",
@@ -128,17 +146,23 @@ int	main(int argc, char **argv)
 	vars.img = player.img;
 	sand->img = mlx_xpm_file_to_image(vars.mlx, "sprites/sand.xpm", &sand->x,
 			&sand->y);
+	sand->type = 's';
+	sand->x = 0;
+	sand->y = 0;
 	water->img = mlx_xpm_file_to_image(vars.mlx, "sprites/water.xpm", &water->x,
 			&water->y);
+	water->type = 'w';
 	chest->img = mlx_xpm_file_to_image(vars.mlx, "sprites/chest.xpm", &chest->x,
 			&chest->y);
+	chest->type = 'c';
 	vars.player = player;
 	ft_printf("before checkmap\n");
-	ft_check_map(map, &sand, '1');
-	ft_check_map(map, &water, '0');
-	ft_check_map(map, &chest, 'C');
+	ft_check_map(map, &sand, '1', 's');
+	ft_check_map(map, &water, '0', 'w');
+	ft_check_map(map, &chest, 'C', 'c');
 	add_end_list(&sand, water);
 	add_end_list(&sand, chest);
+	vars.decors = sand;
 	place_decor(sand, &vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, player.img, player.x, player.y);
 	mlx_hook(vars.win, 2, 0, key_pressed, &vars);

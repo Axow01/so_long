@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/28 22:57:36 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/28 23:05:34 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int	main(int argc, char **argv)
 	vars.win = mlx_new_window(vars.mlx, 1900, 1000, "Le chien marin");
 	player.img = mlx_xpm_file_to_image(vars.mlx, "sprites/character.xpm",
 			&player.x, &player.y);
+	player.x = 200;
+	player.y = 300;
 	vars.img = player.img;
 	sand->img = mlx_xpm_file_to_image(vars.mlx, "sprites/sand.xpm", &sand->x,
 			&sand->y);
@@ -130,6 +132,7 @@ int	main(int argc, char **argv)
 			&water->y);
 	chest->img = mlx_xpm_file_to_image(vars.mlx, "sprites/chest.xpm", &chest->x,
 			&chest->y);
+	vars.player = player;
 	ft_printf("before checkmap\n");
 	ft_check_map(map, &sand, '1');
 	ft_check_map(map, &water, '0');
@@ -137,6 +140,7 @@ int	main(int argc, char **argv)
 	add_end_list(&sand, water);
 	add_end_list(&sand, chest);
 	place_decor(sand, &vars);
+	mlx_put_image_to_window(vars.mlx, vars.win, player.img, player.x, player.y);
 	mlx_hook(vars.win, 2, 0, key_pressed, &vars);
 	mlx_loop(vars.mlx);
 	return (0);

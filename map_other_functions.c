@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/29 17:44:07 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:05:00 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ void	ft_create_map(char *map, t_tile **head, char therm, char type)
 	line = ft_free(line);
 }
 
-int	ft_check_name(void)
+int	ft_check_name(char *map)
 {
-	
+	char	*s;
+
+	s = ft_strrchr(map, '.');
+	if (!s || ft_strncmp(s, ".ber", ft_strlen(s) + 1) != 0)
+		ft_exit("Come on this is not a valid map file extension?", 1);
 	return (1);
 }
 
@@ -63,6 +67,7 @@ int	ft_check_map(char *map, t_game **game)
 	collectible = 0;
 	player_spawn = 0;
 	exit = 0;
+	ft_check_name(map);
 	line = get_next_line(open(map, O_RDONLY));
 	if (ft_strlen(line) * 100 > 2500)
 		ft_exit("The map is too big for my little system :(\n", 1);

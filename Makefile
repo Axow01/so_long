@@ -16,10 +16,10 @@ all: ${LIBD}${LIB} ${NAME}
 ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD}
 	${MAKE} -C ${LIBD} bonus
-	echo "uwu......."
+	@echo "uwu......."
 
 ${NAME}: ${OBJ}
-		${CC} -fsanitize=address -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJ} ${LIBD}${LIB}
+		${CC} -fsanitize=address -framework OpenGL -framework AppKit -o ${NAME} mlx/libmlx.a ${OBJ} ${LIBD}${LIB}
 
 clean:
 	@rm -f ${OBJ}

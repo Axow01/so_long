@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/29 17:21:25 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/18 14:11:40 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,12 @@ int	main(int argc, char **argv)
 				1);
 	game = ft_calloc(1, sizeof(t_game));
 	map = argv[1];
-	ft_check_map(map, &game);
-	/* ----------remove after the parsing done---------- */
-	game->height = 1300;
+	ft_check_map_size(map, &game);
+	ft_check_tiles(open(map, O_RDONLY), &game);
+	ft_check_tiles_value(open(map, O_RDONLY));
 	game->title = "Le chien marin";
-	/* ------------------     end     ------------------ */
+	game->decors = ft_calloc(1, sizeof(t_tile));
+	ft_assign_tiles(&game, open(map, O_RDONLY));
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width, game->height,
 			game->title);

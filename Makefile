@@ -13,7 +13,6 @@ LIB = libft.a
 
 all: ${LIBD}${LIB} ${NAME}
 
-	@afplay ./maybe.wav
 ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD}
 	${MAKE} -C ${LIBD} bonus

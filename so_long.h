@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/29 17:16:27 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/18 14:11:03 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ void				add_decors(t_tile **head, void *img, int x, int y,
 void				ft_create_map(char *map, t_tile **head, char therm,
 						char type);
 /* Check the map if it is valid of not valid == 1. */
-int					ft_check_map(char *map, t_game **game);
-
+int					ft_check_map_size(char *map, t_game **game);
+/* This function checks for the map values to see if they are right. */
+void				ft_check_tiles(int fd, t_game **game);
+/* check a single line. */
+int					ft_check_line(char *line, char check, int all);
+/* check the value of all characters in the map. (COLLECTIBLES, EXITS,
+		PLAYERS) */
+void				ft_check_tiles_value(int fd);
+/* assing the struct for the tiles */
+void				ft_assign_tiles(t_game **game, int fd);
 #endif

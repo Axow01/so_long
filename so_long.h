@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/19 13:53:37 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:00:07 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ void				ft_exit(char *message, int error);
 /* This function add a new node to the tiles node. */
 void				add_decors(t_tile **head, void *img, int x, int y,
 						char type);
-/* This function create the map textures after the map as been checked. */
-void				ft_create_map(char *map, t_tile **head, char therm,
-						char type);
 /* Check the map if it is valid of not valid == 1. */
 int					ft_check_map_size(char *map, t_game **game);
 /* This function checks for the map values to see if they are right. */
@@ -62,6 +59,6 @@ int					ft_check_line(char *line, char check, int all);
 /* check the value of all characters in the map. (COLLECTIBLES, EXITS,
 		PLAYERS) */
 void				ft_check_tiles_value(int fd);
-/* assing the struct for the tiles */
-void				ft_assign_tiles(t_game **game, int fd);
+/* This function convert the map into a char table. */
+char				**ft_convert_map(int fd, t_game **game);
 #endif

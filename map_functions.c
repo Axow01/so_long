@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/18 14:12:41 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:41:17 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,42 +133,4 @@ void	ft_check_tiles_value(int fd)
 	if (exit != 1 || collectible < 1 || player != 1)
 		ft_exit("Map error: to much player, exits or not enough collectibles.",
 				1);
-}
-
-void	ft_assign_tiles(t_game **game, int fd)
-{
-	char	*line;
-	int		i;
-	int		y;
-
-	y = 0;
-	i = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		while (line[i])
-		{
-			if (line[i] == 'P')
-				add_decors(&(*game)->decors, mlx_xpm_file_to_image((*game)->mlx, "sprites/character.xpm", &(*game)->decors->x, &(*game)->decors->y), i * 100, y * 100, 'p');
-			else if (line[i] == 'C')
-				add_decors(&(*game)->decors, mlx_xpm_file_to_image((*game)->mlx, "sprites/chest.xpm", &(*game)->decors->x, &(*game)->decors->y), i * 100, y * 100, 'c');
-			else if (line[i] == 'E')
-				add_decors(&(*game)->decors, mlx_xpm_file_to_image((*game)->mlx, "sprites/character.xpm", &(*game)->decors->x, &(*game)->decors->y), i * 100, y * 100, 'e');
-			i++;
-		}
-		i = 0;
-		y++;
-		line = ft_free(line);
-	}
-}
-
-void	ft_exit(char *message, int error)
-{
-	if (error)
-		ft_printf("%s - Error!", message);
-	else
-		ft_printf("%s", message);
-	exit(error);
 }

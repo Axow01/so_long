@@ -1,5 +1,5 @@
 
-SRC = main.c map_other_functions.c
+SRC = main.c map_functions.c basic_function.c
 
 OBJ = ${SRC:.c=.o}
 

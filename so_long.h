@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 11:14:41 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:03:23 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ typedef struct s_game
 	t_player		*player;
 }					t_game;
 
-/* Prints the error message in the console. */
-void				ft_error(char *message);
 /* Prints a message, and then exit the program with the error type or not. */
 void				ft_exit(char *message, int error);
 /* This function add a new node to the tiles node. */

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 11:23:08 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:16:36 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	ft_playable(char **map, t_game **game)
 	{
 		while (map[row][col])
 		{
-			if (map[row][col] == 'C' && map[row][col + 1] == '1' && map[row][col
-				- 1] == '1' && map[row + 1][col] == '1' && map[row
-				- 1][col] == '1')
+			if ((map[row][col] == 'C' || map[row][col] == 'E') && map[row][col
+				+ 1] == '1' && map[row][col - 1] == '1' && map[row
+				+ 1][col] == '1' && map[row - 1][col] == '1')
 				ft_exit("The map is not playable. Come on !", 1);
-            col++;
+			col++;
 		}
 		col = 0;
 		row++;

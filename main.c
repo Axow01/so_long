@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 10:47:22 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:25:44 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	place_decor(t_tile *decs, t_game *valeur)
 	}
 }
 
-int	key_pressed(int keycode, t_game *game)
+/*int	key_pressed(int keycode, t_game *game)
 {
 	int	modifier;
 
@@ -56,7 +56,7 @@ int	key_pressed(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->win, game->player->img,
 				game->player->x, game->player->y);
 	return (0);
-}
+}*/
 
 void	add_decors(t_tile **head, void *img, int x, int y, char type)
 {
@@ -100,6 +100,7 @@ int	main(int argc, char **argv)
 	ft_check_map_size(map, &game);
 	ft_check_tiles(open(map, O_RDONLY), &game);
 	ft_check_tiles_value(open(map, O_RDONLY));
+	ft_playable(ft_convert_map(open(map, O_RDONLY), &game), &game);
 	game->title = "Le chien marin";
 	game->decors = ft_calloc(1, sizeof(t_tile));
 	game->mlx = mlx_init();

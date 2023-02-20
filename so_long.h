@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 10:00:07 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:14:41 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ int					ft_check_line(char *line, char check, int all);
 void				ft_check_tiles_value(int fd);
 /* This function convert the map into a char table. */
 char				**ft_convert_map(int fd, t_game **game);
+/* This function checks that collectibles and exits are accessible. */
+void				ft_playable(char **map, t_game **game);
 #endif

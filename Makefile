@@ -1,5 +1,5 @@
 
-SRC = main.c check_map.c
+SRC = main.c map_functions.c basic_function.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -9,25 +9,20 @@ CC = gcc
 
 LIBD = libft/
 LIB = libft.a
-MINILIBD = mlx/
-MINILIB = libmlx.a
 
-all: ${MINILIBD}${MINILIB} ${LIBD}${LIB} ${NAME}
 
-${MINILIBD}${MINILIB}:
-	${MAKE} -C ${MINILIBD}
+all: ${LIBD}${LIB} ${NAME}
 
 ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD}
 	${MAKE} -C ${LIBD} bonus
 
 ${NAME}: ${OBJ}
-		${CC} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJ} ${LIBD}${LIB} ${MINILIBD}${MINILIB}
+		${CC} -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJ} ${LIBD}${LIB}
 
 clean:
 	@rm -f ${OBJ}
 	${MAKE} -C ${LIBD} fclean
-	${MAKE} -C ${MINILIBD} clean
 
 fclean: clean
 	@rm -f ${OBJ} ${NAME}
@@ -38,4 +33,6 @@ push: clean
 	@git push origin master
 
 run: all
-	@./so_long "map/default.map"
+	@./so_long map/default.ber
+
+re: fclean all

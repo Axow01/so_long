@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_other_functions.c                              :+:      :+:    :+:   */
+/*   map_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 10:41:17 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:48:37 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_check_map_size(char *map, t_game **game)
 		height++;
 	}
 	line = ft_free(line);
-	(*game)->width = length_line * 100;
+	(*game)->width = (length_line - 1) * 100;
 	(*game)->height = height * 100;
 	if ((*game)->height > 1300 || (*game)->width > 2500)
 		ft_exit("Map error: width or height to big.", 1);

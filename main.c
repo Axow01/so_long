@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 11:25:44 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:46:23 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	place_decor(t_tile *decs, t_game *valeur)
 	current = decs;
 	mlx = valeur->mlx;
 	win = valeur->win;
-	mlx_put_image_to_window(mlx, win, current->img, current->x, current->y);
+	if (current->img)
+		mlx_put_image_to_window(mlx, win, current->img, current->x, current->y);
 	current = current->next;
 	while (current)
 	{
+		ft_printf("tiles....\n");
 		mlx_put_image_to_window(mlx, win, current->img, current->x, current->y);
 		if (current->next == NULL)
 			return ;
@@ -34,7 +36,10 @@ void	place_decor(t_tile *decs, t_game *valeur)
 
 /*int	key_pressed(int keycode, t_game *game)
 {
-	int	modifier;
+	int		modifier;
+	t_tile	*newbitch;
+	t_tile	*current;
+	t_tile	*current;
 
 	modifier = 100;
 	mlx_clear_window(game->mlx, game->win);
@@ -60,9 +65,9 @@ void	place_decor(t_tile *decs, t_game *valeur)
 
 void	add_decors(t_tile **head, void *img, int x, int y, char type)
 {
-	t_tile	*newbitch;
 	t_tile	*current;
-
+	t_tile	*newbitch;
+	
 	current = *head;
 	newbitch = ft_calloc(1, sizeof(t_tile));
 	newbitch->img = img;
@@ -106,6 +111,9 @@ int	main(int argc, char **argv)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width, game->height,
 			game->title);
+	ft_create_decors(&game->decors, &game, ft_convert_map(open(map, O_RDONLY),
+				&game));
+	place_decor(game->decors, game);
 	//mlx_hook(game->win, 2, 0, key_pressed, game);
 	mlx_loop(game->mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 12:16:36 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:51:34 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,33 @@ void	ft_playable(char **map, t_game **game)
 				+ 1] == '1' && map[row][col - 1] == '1' && map[row
 				+ 1][col] == '1' && map[row - 1][col] == '1')
 				ft_exit("The map is not playable. Come on !", 1);
+			col++;
+		}
+		col = 0;
+		row++;
+	}
+}
+
+void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	col = 0;
+	while (row < (*game)->height / 100)
+	{
+		while (map[row][col])
+		{
+			if (map[row][col] == '1')
+				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,
+							"sprites/sand.xpm", &(*tiles)->x, &(*tiles)->y), col
+						* 100, row * 100, '1');
+			else if (map[row][col] == '0' || map[row][col] == 'P'
+					|| map[row][col] == 'C')
+				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,
+							"sprites/water.xpm", &(*tiles)->x, &(*tiles)->y),
+						col * 100, row * 100, '0');
 			col++;
 		}
 		col = 0;

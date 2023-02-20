@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 12:03:23 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:39:34 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ void				ft_check_tiles_value(int fd);
 char				**ft_convert_map(int fd, t_game **game);
 /* This function checks that collectibles and exits are accessible. */
 void				ft_playable(char **map, t_game **game);
+/* This function create the decors of the map. (walls, background, chest , player, exits) */
+void				ft_create_decors(t_tile **tiles, t_game **game, char **map);
 #endif

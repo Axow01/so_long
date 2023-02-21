@@ -18,7 +18,7 @@ ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD} bonus
 
 ${NAME}: ${OBJ}
-		${CC} -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJ} ${LIBD}${LIB}
+		${CC} -fsanitize=address -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJ} ${LIBD}${LIB}
 
 clean:
 	@rm -f ${OBJ}

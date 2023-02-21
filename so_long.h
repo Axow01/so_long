@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 14:09:50 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:38:39 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,6 @@ void				ft_create_decors(t_tile **tiles, t_game **game, char **map);
 /* ... */
 void				ft_move_player(t_player **player, int modifierx,
 						int modifiery);
+/* flood fill recursive function. */
+void				ft_flood_init(char **map, t_game *game);
 #endif

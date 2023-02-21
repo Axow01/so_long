@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 14:15:38 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:45:44 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	main(int argc, char **argv)
 			game->title);
 	ft_create_decors(&game->decors, &game, ft_convert_map(open(map, O_RDONLY),
 				&game));
+	ft_flood_init(ft_convert_map(open(map, O_RDONLY), &game), game);
 	place_decor(game->decors, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->player->img,
 			game->player->x, game->player->y);

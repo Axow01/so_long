@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/21 13:26:47 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:01:44 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	**ft_convert_map(int fd, t_game **game)
 		line = ft_free(line);
 		row++;
 	}
+	close(fd);
 	return (map);
 }
 

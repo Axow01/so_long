@@ -16,6 +16,7 @@ all: ${LIBD}${LIB} ${NAME}
 ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD}
 	${MAKE} -C ${LIBD} bonus
+	echo "uwu......."
 
 ${NAME}: ${OBJ}
 		${CC} -fsanitize=address -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJ} ${LIBD}${LIB}

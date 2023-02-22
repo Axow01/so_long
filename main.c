@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/22 11:01:58 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:48:03 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	key_pressed(int keycode, t_game *game)
 	modifier = 100;
 	mlx_clear_window(game->mlx, game->win);
 	place_decor(game->decors, game);
-	if (keycode == 2) // d
+	if (keycode == 2 || keycode == 124) // d
 		ft_move_player(&game, 100, 0);
-	else if (keycode == 1) // s
+	else if (keycode == 1 || keycode == 125) // s
 		ft_move_player(&game, 0, 100);
-	else if (keycode == 0) // a
+	else if (keycode == 0 || keycode == 123) // a
 		ft_move_player(&game, -100, 0);
-	else if (keycode == 13)
+	else if (keycode == 13 || keycode == 126)
 		ft_move_player(&game, 0, -100);
 	if (keycode == 53)
 	{

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:20:30 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/22 11:19:44 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:48:31 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	ft_check_moving_point(t_game **game, int x, int y)
 			if (current->type == 'C')
 			{
 				(*game)->collected_c--;
-				ft_printf("%d\n", (*game)->collected_c);
 				ft_delete_tile((*game)->decors, x, y, 'C');
 				return (0);
 			}

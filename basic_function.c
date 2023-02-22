@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/22 11:15:05 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:36:30 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 			}
 			else if (map[row][col] == 'C')
 				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,
-							"sprites/chest.xpm", &(*tiles)->x, &(*tiles)->y),
+							"sprites/spacechar.xpm", &(*tiles)->x, &(*tiles)->y),
 						col * 100, row * 100, 'C');
 			else if (map[row][col] == 'E')
 				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,

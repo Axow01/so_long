@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/20 13:48:37 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:01:30 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,14 @@ int	ft_check_line(char *line, char check, int all)
 	return (1);
 }
 
-void	ft_check_tiles_value(int fd)
+void	ft_check_tiles_value(int fd, t_game *game)
 {
-	int		collectible;
 	int		player;
 	int		exit;
 	int		i;
 	char	*line;
 
-	collectible = 0;
+	game->collected_c = 0;
 	player = 0;
 	exit = 0;
 	i = 0;
@@ -122,7 +121,7 @@ void	ft_check_tiles_value(int fd)
 			if (line[i] == 'P')
 				player += 1;
 			else if (line[i] == 'C')
-				collectible += 1;
+				game->collected_c += 1;
 			else if (line[i] == 'E')
 				exit += 1;
 			i++;
@@ -130,7 +129,7 @@ void	ft_check_tiles_value(int fd)
 		i = 0;
 		line = ft_free(line);
 	}
-	if (exit != 1 || collectible < 1 || player != 1)
+	if (exit != 1 || game->collected_c < 1 || player != 1)
 		ft_exit("Map error: to much player, exits or not enough collectibles.",
 				1);
 }

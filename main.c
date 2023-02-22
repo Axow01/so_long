@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/21 13:45:44 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:01:58 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	key_pressed(int keycode, t_game *game)
 	mlx_clear_window(game->mlx, game->win);
 	place_decor(game->decors, game);
 	if (keycode == 2) // d
-		ft_move_player(&(*game).player, 100, 0);
+		ft_move_player(&game, 100, 0);
 	else if (keycode == 1) // s
-		ft_move_player(&(*game).player, 0, 100);
+		ft_move_player(&game, 0, 100);
 	else if (keycode == 0) // a
-		ft_move_player(&(*game).player, -100, 0);
+		ft_move_player(&game, -100, 0);
 	else if (keycode == 13)
-		ft_move_player(&(*game).player, 0, -100);
+		ft_move_player(&game, 0, -100);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(game->mlx, game->win);
@@ -76,16 +76,12 @@ void	add_decors(t_tile **head, void *img, int x, int y, char type)
 	current->next = newbitch;
 }
 
-void	add_end_list(t_tile **head, t_tile *ajout)
+int	ft_renderer(t_game **game)
 {
-	t_tile	*current;
-
-	current = *head;
-	while (current->next)
-	{
-		current = current->next;
-	}
-	current->next = ajout;
+	place_decor((*game)->decors, *game);
+	mlx_put_image_to_window((*game)->mlx, (*game)->win, (*game)->player->img,
+			(*game)->player->x, (*game)->player->y);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -100,7 +96,7 @@ int	main(int argc, char **argv)
 	map = argv[1];
 	ft_check_map_size(map, &game);
 	ft_check_tiles(open(map, O_RDONLY), &game);
-	ft_check_tiles_value(open(map, O_RDONLY));
+	ft_check_tiles_value(open(map, O_RDONLY), game);
 	ft_playable(ft_convert_map(open(map, O_RDONLY), &game), &game);
 	game->title = "Le chien marin";
 	game->decors = ft_calloc(1, sizeof(t_tile));
@@ -111,9 +107,7 @@ int	main(int argc, char **argv)
 	ft_create_decors(&game->decors, &game, ft_convert_map(open(map, O_RDONLY),
 				&game));
 	ft_flood_init(ft_convert_map(open(map, O_RDONLY), &game), game);
-	place_decor(game->decors, game);
-	mlx_put_image_to_window(game->mlx, game->win, game->player->img,
-			game->player->x, game->player->y);
+	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
 	mlx_loop(game->mlx);
 	return (0);

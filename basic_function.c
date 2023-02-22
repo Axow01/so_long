@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/21 16:11:12 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:15:05 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 			if (map[row][col] == 'P')
 			{
 				(*game)->player->img = mlx_xpm_file_to_image((*game)->mlx,
-						"sprites/character.xpm", &(*game)->player->x,
-						&(*game)->player->y);
+																"sprites/character.xpm",
+																&(*game)->player->x,
+																&(*game)->player->y);
 				(*game)->player->x = col * 100;
 				(*game)->player->y = row * 100;
 			}
@@ -98,6 +99,10 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,
 							"sprites/chest.xpm", &(*tiles)->x, &(*tiles)->y),
 						col * 100, row * 100, 'C');
+			else if (map[row][col] == 'E')
+				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,
+							"sprites/exit.xpm", &(*tiles)->x, &(*tiles)->y),
+						col * 100, row * 100, 'E');
 			col++;
 		}
 		col = 0;
@@ -105,10 +110,13 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 	}
 }
 
-void	ft_move_player(t_player **player, int modifierx, int modifiery)
+void	ft_move_player(t_game **game, int modifierx, int modifiery)
 {
-	(*player)->x += modifierx;
-	(*player)->y += modifiery;
+	if (ft_check_moving_point(game, (*game)->player->x + modifierx,
+			(*game)->player->y + modifiery))
+		return ;
+	(*game)->player->x += modifierx;
+	(*game)->player->y += modifiery;
 }
 
 void	ft_exit(char *message, int error)

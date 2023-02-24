@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/16 18:08:08 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/24 17:07:03 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+//# include <mlx.h>
 # include "mlx/mlx.h"
 
 typedef struct s_tile
@@ -42,6 +43,7 @@ typedef struct s_game
 	t_tile			*decors;
 	t_player		*player;
 	int				collected_c;
+	char			**map;
 }					t_game;
 
 /* Prints a message, and then exit the program with the error type or not. */

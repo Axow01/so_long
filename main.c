@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/22 13:48:03 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:35:42 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,16 @@ int	main(int argc, char **argv)
 	ft_check_map_size(map, &game);
 	ft_check_tiles(open(map, O_RDONLY), &game);
 	ft_check_tiles_value(open(map, O_RDONLY), game);
-	ft_playable(ft_convert_map(open(map, O_RDONLY), &game), &game);
+	game->map = ft_convert_map(open(map, O_RDONLY), &game);
 	game->title = "Le chien marin";
 	game->decors = ft_calloc(1, sizeof(t_tile));
 	game->player = ft_calloc(1, sizeof(t_player));
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width, game->height,
 			game->title);
-	ft_create_decors(&game->decors, &game, ft_convert_map(open(map, O_RDONLY),
-				&game));
-	ft_flood_init(ft_convert_map(open(map, O_RDONLY), &game), game);
+	ft_create_decors(&game->decors, &game, game->map);
+	ft_flood_init(game->map, game);
+	// Free game->map here and close fd.
 	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
 	mlx_loop(game->mlx);

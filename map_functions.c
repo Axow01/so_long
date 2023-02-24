@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/22 11:01:30 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:36:22 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_check_map_size(char *map, t_game **game)
 	line = ft_free(line);
 	(*game)->width = (length_line - 1) * 100;
 	(*game)->height = height * 100;
+	close(i);
 	if ((*game)->height > 1300 || (*game)->width > 2500)
 		ft_exit("Map error: width or height to big.", 1);
 	return (1);
@@ -73,6 +74,7 @@ void	ft_check_tiles(int fd, t_game **game)
 			if (!ft_check_line(line, '1', 0))
 				ft_exit("Map error: the sides of the map are wrong.", 1);
 		}
+		close(fd);
 		line = ft_free(line);
 		height++;
 	}
@@ -129,6 +131,7 @@ void	ft_check_tiles_value(int fd, t_game *game)
 		i = 0;
 		line = ft_free(line);
 	}
+	close(fd);
 	if (exit != 1 || game->collected_c < 1 || player != 1)
 		ft_exit("Map error: to much player, exits or not enough collectibles.",
 				1);

@@ -10,6 +10,9 @@ CC = gcc
 LIBD = libft/
 LIB = libft.a
 
+MLX = libmlx.a
+MLXPATH = mlx/
+
 
 all: ${LIBD}${LIB} ${NAME}
 
@@ -18,14 +21,18 @@ ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD} bonus
 	@echo "uwu......."
 
-${NAME}: ${OBJ}
+${NAME}: ${OBJ} ${MLXPATH}${MLX}
 		${CC} -fsanitize=address -framework OpenGL -framework AppKit -o ${NAME} mlx/libmlx.a ${OBJ} ${LIBD}${LIB}
+
+${MLXPATH}${MLX}:
+		${MAKE} -C ${MLXPATH}
 
 clean:
 	@rm -f ${OBJ}
 	${MAKE} -C ${LIBD} fclean
 
 fclean: clean
+	${MAKE} -C ${MLXPATH} clean
 	@rm -f ${OBJ} ${NAME}
 
 push: clean

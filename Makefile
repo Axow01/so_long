@@ -22,7 +22,7 @@ ${LIBD}${LIB}:
 	@echo "uwu......."
 
 ${NAME}: ${OBJ} ${MLXPATH}${MLX}
-		${CC} -fsanitize=address -framework OpenGL -framework AppKit -o ${NAME} mlx/libmlx.a ${OBJ} ${LIBD}${LIB}
+		${CC} -framework OpenGL -framework AppKit -o ${NAME} mlx/libmlx.a ${OBJ} ${LIBD}${LIB}
 
 ${MLXPATH}${MLX}:
 		${MAKE} -C ${MLXPATH}

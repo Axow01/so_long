@@ -6,7 +6,7 @@
 /*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/16 18:12:48 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/24 11:17:23 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 			if (map[row][col] == 'P')
 			{
 				(*game)->player->img = mlx_xpm_file_to_image((*game)->mlx,
-																"sprites/character.xpm",
+																"sprites/characterms.xpm",
 																&(*game)->player->x,
 																&(*game)->player->y);
 				(*game)->player->x = col * 100;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_function.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/24 17:35:27 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:18:06 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	**ft_convert_map(int fd, t_game **game)
 
 	row = 0;
 	col = 0;
+	//if (!(*game)->map)
 	map = (char **)ft_calloc((*game)->height / 100, sizeof(char *));
 	while (col < (*game)->height / 100)
 		map[col++] = ft_calloc((*game)->width / 100, sizeof(char));
@@ -101,8 +102,8 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 						col * 100, row * 100, 'C');
 			else if (map[row][col] == 'E')
 				add_decors(tiles, mlx_xpm_file_to_image((*game)->mlx,
-							"sprites/exit.xpm", &(*tiles)->x, &(*tiles)->y),
-						col * 100, row * 100, 'E');
+							"sprites/exit.xpm", &(*tiles)->x, &(*tiles)->y), col
+						* 100, row * 100, 'E');
 			col++;
 		}
 		col = 0;
@@ -126,4 +127,17 @@ void	ft_exit(char *message, int error)
 	else
 		ft_printf("%s", message);
 	exit(error);
+}
+
+void	ft_free_darray(char **array, int height)
+{
+	int y;
+
+	y = 0;
+	while (y < height)
+	{
+		array[y] = ft_free(array[y]);
+		y++;
+	}
+	array = ft_free(array);
 }

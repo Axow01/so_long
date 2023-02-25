@@ -1,5 +1,5 @@
 
-SRC = main.c map_functions.c basic_function.c flood_fill_colision.c
+SRC = main.c map_functions.c basic_function.c flood_fill_colision.c errors.c
 
 OBJ = ${SRC:.c=.o}
 

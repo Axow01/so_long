@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_colision.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:20:30 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/22 13:48:31 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:40:47 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_check_moving_point(t_game **game, int x, int y)
 				return (0);
 			}
 			else if (current->type == 'E' && (*game)->collected_c == 0)
-				ft_exit("GG you won the game, not a big acomplishment !", 0);
+				ft_exit_free(*game, "GG, you won the game. Nice work !");
 			return (1);
 		}
 		current = current->next;

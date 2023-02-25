@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/24 17:07:03 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:40:28 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,8 @@ void				ft_flood_init(char **map, t_game *game);
 int					ft_check_moving_point(t_game **game, int x, int y);
 /* Delete a tile. */
 void				ft_delete_tile(t_tile *tile, int x, int y, char type);
+/* Free a 2d array. */
+void				ft_free_darray(char **array, int height);
+/* Free all the structs. */
+void				ft_exit_free(t_game *game, char *string);
 #endif

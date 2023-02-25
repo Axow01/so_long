@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/24 17:36:22 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:18:29 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	ft_check_map_size(char *map, t_game **game)
 	ft_check_name(map);
 	line = get_next_line(i);
 	length_line = ft_strlen(line);
-	while (line != NULL)
+	free(line);
+	while (1)
 	{
 		line = get_next_line(i);
 		if (!line)
@@ -42,8 +43,8 @@ int	ft_check_map_size(char *map, t_game **game)
 		if (ft_strlen(line) != length_line)
 			ft_exit("Map error: the lines are not equal in length\n", 1);
 		height++;
+		free(line);
 	}
-	line = ft_free(line);
 	(*game)->width = (length_line - 1) * 100;
 	(*game)->height = height * 100;
 	close(i);

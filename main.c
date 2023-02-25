@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/25 12:59:49 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/25 15:14:51 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,12 @@ int	main(int argc, char **argv)
 	char	*mapn;
 	t_game	*game;
 	char	**map;
+	int		y;
 
 	if (argc != 2)
 		ft_exit("You must provide the path of the map, use: ./so_long <map>",
 				1);
+	ft_printf("PID: %d\n", getpid());
 	game = ft_calloc(1, sizeof(t_game));
 	game->decors = ft_calloc(1, sizeof(t_tile));
 	game->player = ft_calloc(1, sizeof(t_player));
@@ -108,7 +110,14 @@ int	main(int argc, char **argv)
 	ft_create_decors(&game->decors, &game, map);
 	ft_flood_init(map, game);
 	// Free game->map here and close fd.
-	ft_free_darray(map, game->height / 100);
+	y = 0;
+	while (y < game->height / 100)
+	{
+		//free(map[y]);
+		y++;
+	}
+	//map = ft_free(map);
+	//ft_free_darray(map, game->height / 100);
 	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
 	mlx_loop(game->mlx);

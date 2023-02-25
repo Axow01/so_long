@@ -6,7 +6,7 @@
 /*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/25 10:20:56 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/25 12:59:49 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ int	main(int argc, char **argv)
 	ft_check_tiles(open(mapn, O_RDONLY), &game);
 	ft_check_tiles_value(open(mapn, O_RDONLY), game);
 	map = ft_convert_map(open(mapn, O_RDONLY), &game);
-	int i = 0;
-	while (i < game->height / 100)
-		ft_printf("%s\n", map[i++]);
 	game->title = "Le chien marin";
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width, game->height,

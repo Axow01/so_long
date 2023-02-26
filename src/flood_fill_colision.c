@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_colision.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:20:30 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/25 10:40:47 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/26 13:05:09 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	ft_flood_fill(char **map, int x, int y, int *c_count, int *e_count)
 {

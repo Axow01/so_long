@@ -6,11 +6,11 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/26 12:53:45 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/26 13:04:56 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 char	**ft_convert_map(int fd, t_game **game)
 {

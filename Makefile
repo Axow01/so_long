@@ -1,17 +1,18 @@
 
-SRC = main.c map_functions.c basic_function.c flood_fill_colision.c errors.c
+SRC = src/main.c src/map_functions.c src/basic_function.c \
+	src/flood_fill_colision.c src/errors.c
 
-OBJ = ${SRC:.c=.o}
+OBJ = $(patsubst src/%.c,bin/%.o,$(SRC))
 
 NAME = so_long
 
 CC = gcc
 
-LIBD = libft/
+LIBD = includes/libft/
 LIB = libft.a
 
 MLX = libmlx.a
-MLXPATH = mlx/
+MLXPATH = includes/mlx/
 
 
 all: ${LIBD}${LIB} ${NAME}
@@ -19,13 +20,14 @@ all: ${LIBD}${LIB} ${NAME}
 ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD}
 	${MAKE} -C ${LIBD} bonus
-	@echo "uwu......."
 
 ${NAME}: ${OBJ} ${MLXPATH}${MLX}
-		${CC} -framework OpenGL -framework AppKit -o ${NAME} mlx/libmlx.a ${OBJ} ${LIBD}${LIB}
+		${CC} -framework OpenGL -framework AppKit -o ${NAME} ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB}
 
 ${MLXPATH}${MLX}:
 		${MAKE} -C ${MLXPATH}
+bin/%.o: src/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	@rm -f ${OBJ}
@@ -34,13 +36,5 @@ clean:
 fclean: clean
 	${MAKE} -C ${MLXPATH} clean
 	@rm -f ${OBJ} ${NAME}
-
-push: clean
-	@git add .
-	@git commit -m "makefile push..."
-	@git push origin master
-
-run: all
-	@./so_long map/default.ber
 
 re: fclean all

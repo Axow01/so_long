@@ -6,7 +6,7 @@
 /*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/25 10:40:28 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/26 10:23:11 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_tile
 typedef struct s_player
 {
 	void			*img;
+	void			*img2;
+	int				currentimg;
 	int				x;
 	int				y;
 }					t_player;

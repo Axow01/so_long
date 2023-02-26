@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/25 15:14:51 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:43:12 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ void	add_decors(t_tile **head, void *img, int x, int y, char type)
 
 int	ft_renderer(t_game **game)
 {
+	void	*p;
+	
+	p = (*game)->player->img;
+	(*game)->player->img = (*game)->player->img2;
+	(*game)->player->img2 = p;
+	mlx_clear_window((*game)->mlx, (*game)->win);
 	place_decor((*game)->decors, *game);
 	mlx_put_image_to_window((*game)->mlx, (*game)->win, (*game)->player->img,
 			(*game)->player->x, (*game)->player->y);
@@ -89,12 +95,10 @@ int	main(int argc, char **argv)
 	char	*mapn;
 	t_game	*game;
 	char	**map;
-	int		y;
 
 	if (argc != 2)
 		ft_exit("You must provide the path of the map, use: ./so_long <map>",
 				1);
-	ft_printf("PID: %d\n", getpid());
 	game = ft_calloc(1, sizeof(t_game));
 	game->decors = ft_calloc(1, sizeof(t_tile));
 	game->player = ft_calloc(1, sizeof(t_player));
@@ -107,17 +111,11 @@ int	main(int argc, char **argv)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width, game->height,
 			game->title);
+	game->player->img2 = mlx_xpm_file_to_image(game->mlx, "sprites/characterp2.xpm", &game->player->x, &game->player->y);
 	ft_create_decors(&game->decors, &game, map);
 	ft_flood_init(map, game);
 	// Free game->map here and close fd.
-	y = 0;
-	while (y < game->height / 100)
-	{
-		//free(map[y]);
-		y++;
-	}
-	//map = ft_free(map);
-	//ft_free_darray(map, game->height / 100);
+	ft_free_darray(map, game->height / 100);
 	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
 	mlx_loop(game->mlx);

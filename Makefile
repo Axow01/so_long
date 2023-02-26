@@ -22,7 +22,7 @@ ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD} bonus
 
 ${NAME}: ${OBJ} ${MLXPATH}${MLX}
-		${CC} -framework OpenGL -framework AppKit -Imlx -o ${NAME} ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB}
+		${CC} ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB} -framework OpenGL -framework AppKit -Imlx -o ${NAME}
 
 ${MLXPATH}${MLX}:
 		${MAKE} -C ${MLXPATH}

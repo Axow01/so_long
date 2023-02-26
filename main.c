@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/26 11:49:44 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/26 12:50:02 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ void	add_decors(t_tile **head, void *img, int x, int y, char type)
 
 int	ft_renderer(t_game **game)
 {
-	void	*p;
-	
-	p = (*game)->player->img;
-	(*game)->player->img = (*game)->player->img2;
-	(*game)->player->img2 = p;
 	mlx_clear_window((*game)->mlx, (*game)->win);
 	place_decor((*game)->decors, *game);
 	mlx_put_image_to_window((*game)->mlx, (*game)->win, (*game)->player->img,
@@ -103,6 +98,7 @@ int	main(int argc, char **argv)
 	game->decors = ft_calloc(1, sizeof(t_tile));
 	game->player = ft_calloc(1, sizeof(t_player));
 	mapn = argv[1];
+	game->moved = 0;
 	ft_check_map_size(mapn, &game);
 	ft_check_tiles(open(mapn, O_RDONLY), &game);
 	ft_check_tiles_value(open(mapn, O_RDONLY), game);

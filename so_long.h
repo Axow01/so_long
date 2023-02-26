@@ -6,7 +6,7 @@
 /*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/26 10:23:11 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/26 12:10:12 by mick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_game
 	t_tile			*decors;
 	t_player		*player;
 	int				collected_c;
+	int				moved;
 	char			**map;
 }					t_game;
 

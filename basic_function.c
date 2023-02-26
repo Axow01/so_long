@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_function.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mick <mick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/25 10:18:06 by mick             ###   ########.fr       */
+/*   Updated: 2023/02/26 12:53:45 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	**ft_convert_map(int fd, t_game **game)
 
 	row = 0;
 	col = 0;
-	//if (!(*game)->map)
 	map = (char **)ft_calloc((*game)->height / 100, sizeof(char *));
 	while (col < (*game)->height / 100)
 		map[col++] = ft_calloc((*game)->width / 100, sizeof(char));
@@ -90,7 +89,7 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 			if (map[row][col] == 'P')
 			{
 				(*game)->player->img = mlx_xpm_file_to_image((*game)->mlx,
-																"sprites/characterms.xpm",
+																"sprites/character.xpm",
 																&(*game)->player->x,
 																&(*game)->player->y);
 				(*game)->player->x = col * 100;
@@ -118,6 +117,8 @@ void	ft_move_player(t_game **game, int modifierx, int modifiery)
 		return ;
 	(*game)->player->x += modifierx;
 	(*game)->player->y += modifiery;
+	(*game)->moved += 1;
+	ft_printf("Player moves: %d\n", (*game)->moved);
 }
 
 void	ft_exit(char *message, int error)

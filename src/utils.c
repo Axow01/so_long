@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:46:50 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 11:05:53 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:50:45 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,28 @@ void	ft_init_map(t_game *game, char *mapn)
 	ft_create_decors(&game->decors, &game, map);
 	ft_flood_init(map, game);
 	ft_free_darray(map, game->height / 100);
+}
+
+void	add_decors(t_game *game, int x, int y, char type)
+{
+	t_tile	*current;
+	t_tile	*newbitch;
+
+	current = game->decors;
+	newbitch = ft_calloc(1, sizeof(t_tile));
+	if (type == '1')
+		newbitch->img = game->sand;
+	else if (type == '0')
+		newbitch->img = game->water;
+	else if (type == 'E')
+		newbitch->img = game->exit;
+	else
+		newbitch->img = game->chest;
+	newbitch->x = x;
+	newbitch->y = y;
+	newbitch->type = type;
+	newbitch->next = NULL;
+	while (current->next)
+		current = current->next;
+	current->next = newbitch;
 }

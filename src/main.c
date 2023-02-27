@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 11:06:43 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:57:48 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,11 @@ int	key_pressed(int keycode, t_game *game)
 	return (0);
 }
 
-void	add_decors(t_game *game, int x, int y, char type)
+int	ft_quitt(int keycode, t_game *game)
 {
-	t_tile	*current;
-	t_tile	*newbitch;
-
-	current = game->decors;
-	newbitch = ft_calloc(1, sizeof(t_tile));
-	if (type == '1')
-		newbitch->img = game->sand;
-	else if (type == '0')
-		newbitch->img = game->water;
-	else if (type == 'E')
-		newbitch->img = game->exit;
-	else
-		newbitch->img = game->chest;
-	newbitch->x = x;
-	newbitch->y = y;
-	newbitch->type = type;
-	newbitch->next = NULL;
-	while (current->next)
-		current = current->next;
-	current->next = newbitch;
+	(void)keycode;
+	ft_exit_free(game, "Qutting the game.");
+	return (0);
 }
 
 int	ft_renderer(t_game **game)
@@ -115,6 +98,7 @@ int	main(int argc, char **argv)
 	ft_init_map(game, mapn);
 	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
+	//mlx_hook(game->mlx, 17, 0, ft_quitt, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

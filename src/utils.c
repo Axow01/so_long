@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 10:22:00 by mick              #+#    #+#             */
-/*   Updated: 2023/02/27 10:28:21 by mmarcott         ###   ########.fr       */
+/*   Created: 2023/02/27 09:46:50 by mmarcott          #+#    #+#             */
+/*   Updated: 2023/02/27 11:05:53 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_exit_free(t_game *game, char *string)
+void	ft_count_tiles(int *player, int *exit, char line, t_game *game)
 {
-	t_tile	*current;
-	t_tile	*follow;
-
-	current = game->decors;
-	while (current->next)
-	{
-		follow = current->next;
-		free(current);
-		current = follow;
-	}
-	game->player = ft_free(game->player);
-	game = ft_free(game);
-	ft_exit(string, 0);
+	if (line == 'P')
+		*player += 1;
+	else if (line == 'C')
+		game->collected_c += 1;
+	else if (line == 'E')
+		*exit += 1;
 }
 
-void	ft_exit(char *message, int error)
+void	ft_init_map(t_game *game, char *mapn)
 {
-	if (error)
-		ft_printf("Error\n%s\n", message);
-	else
-		ft_printf("%s", message);
-	exit(error);
+	char	**map;
+
+	map = ft_convert_map(open(mapn, O_RDONLY), &game);
+	ft_create_decors(&game->decors, &game, map);
+	ft_flood_init(map, game);
+	ft_free_darray(map, game->height / 100);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 01:19:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/01/28 20:18:31 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:09:43 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoingnl(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	joined = ft_calloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1),
-						sizeof(char));
+			sizeof(char));
 	if (!joined)
 		return (NULL);
 	while (s1 && s1[i])

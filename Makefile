@@ -1,6 +1,6 @@
 
 SRC = src/main.c src/map_functions.c src/basic_function.c \
-	src/flood_fill_colision.c src/errors.c
+	src/flood_fill_colision.c src/errors.c src/utils.c
 
 OBJ = $(patsubst src/%.c,bin/%.o,$(SRC))
 
@@ -22,7 +22,7 @@ ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD} bonus
 
 ${NAME}: ${OBJ} ${MLXPATH}${MLX}
-		${CC} ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB} -framework OpenGL -framework AppKit -Imlx -o ${NAME}
+		${CC} -g ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB} -framework OpenGL -framework AppKit -Imlx -o ${NAME}
 
 ${MLXPATH}${MLX}:
 		${MAKE} -C ${MLXPATH}

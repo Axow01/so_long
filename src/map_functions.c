@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/26 13:05:15 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:16:58 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_name(char *map)
 	return (1);
 }
 
-int	ft_check_map_size(char *map, t_game **game)
+int	ft_check_map_size(char *map, t_game **game, int fd)
 {
 	char	*line;
 	int		i;
@@ -30,14 +30,12 @@ int	ft_check_map_size(char *map, t_game **game)
 	int		height;
 
 	height = 1;
-	i = open(map, O_RDONLY);
-	ft_check_name(map);
-	line = get_next_line(i);
+	line = get_next_line(fd);
 	length_line = ft_strlen(line);
 	free(line);
 	while (1)
 	{
-		line = get_next_line(i);
+		line = get_next_line(fd);
 		if (!line)
 			break ;
 		if (ft_strlen(line) != length_line)
@@ -47,7 +45,7 @@ int	ft_check_map_size(char *map, t_game **game)
 	}
 	(*game)->width = (length_line - 1) * 100;
 	(*game)->height = height * 100;
-	close(i);
+	close(fd);
 	if ((*game)->height > 1300 || (*game)->width > 2500)
 		ft_exit("Map error: width or height to big.", 1);
 	return (1);
@@ -120,20 +118,12 @@ void	ft_check_tiles_value(int fd, t_game *game)
 		if (!line)
 			break ;
 		while (line[i])
-		{
-			if (line[i] == 'P')
-				player += 1;
-			else if (line[i] == 'C')
-				game->collected_c += 1;
-			else if (line[i] == 'E')
-				exit += 1;
-			i++;
-		}
+			ft_count_tiles(&player, &exit, line[i++], game);
 		i = 0;
 		line = ft_free(line);
 	}
 	close(fd);
 	if (exit != 1 || game->collected_c < 1 || player != 1)
 		ft_exit("Map error: to much player, exits or not enough collectibles.",
-				1);
+			1);
 }

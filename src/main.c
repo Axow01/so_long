@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 13:57:48 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:31:07 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	key_pressed(int keycode, t_game *game)
 	else
 		mlx_put_image_to_window(game->mlx, game->win, game->player->img,
 			game->player->x, game->player->y);
-	return (0);
+	return (1);
 }
 
-int	ft_quitt(int keycode, t_game *game)
+int	ft_quitt(t_game *game)
 {
-	(void)keycode;
+	mlx_destroy_window(game->mlx, game->win);
 	ft_exit_free(game, "Qutting the game.");
 	return (0);
 }
@@ -98,7 +98,7 @@ int	main(int argc, char **argv)
 	ft_init_map(game, mapn);
 	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
-	//mlx_hook(game->mlx, 17, 0, ft_quitt, game);
+	mlx_hook(game->win, 17, 1L << 2, ft_quitt, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

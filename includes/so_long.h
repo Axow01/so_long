@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 13:54:12 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:27:52 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ void				ft_count_tiles(int *player, int *exit, char line,
 /* This init the make dans the flood fill. */
 void				ft_init_map(t_game *game, char *mapn);
 /* Qutit close button. */
-int					ft_quitt(int keycode, t_game *game);
+int					ft_quitt(t_game *game);
 #endif

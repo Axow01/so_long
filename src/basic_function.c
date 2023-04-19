@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 10:27:32 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:12:20 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 
 	row = 0;
 	col = 0;
+	(void)tiles;
 	ft_init_sprites((*game));
 	while (row < (*game)->height / 100)
 	{

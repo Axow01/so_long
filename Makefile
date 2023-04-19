@@ -14,6 +14,8 @@ LIB = libft.a
 MLX = libmlx.a
 MLXPATH = includes/mlx/
 
+CFLAGS = -Werror -Wall -Wextra
+
 
 all: ${LIBD}${LIB} ${NAME}
 
@@ -22,15 +24,16 @@ ${LIBD}${LIB}:
 	${MAKE} -C ${LIBD} bonus
 
 ${NAME}: ${OBJ} ${MLXPATH}${MLX}
-		${CC} -g ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB} -framework OpenGL -framework AppKit -Imlx -o ${NAME}
+		${CC} $(CFLAGS) -g ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB} -framework OpenGL -framework AppKit -Imlx -o ${NAME}
 
 ${MLXPATH}${MLX}:
 		${MAKE} -C ${MLXPATH}
 bin/%.o: src/%.c
+	@mkdir -p bin/
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	@rm -f ${OBJ}
+	@rm -rf bin/
 	${MAKE} -C ${LIBD} fclean
 
 fclean: clean

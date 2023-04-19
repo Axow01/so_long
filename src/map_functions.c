@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 10:16:58 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:11:48 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int	ft_check_name(char *map)
 	return (1);
 }
 
-int	ft_check_map_size(char *map, t_game **game, int fd)
+int	ft_check_map_size(t_game **game, int fd)
 {
 	char	*line;
-	int		i;
 	int		length_line;
 	int		height;
 
@@ -38,7 +37,7 @@ int	ft_check_map_size(char *map, t_game **game, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (ft_strlen(line) != length_line)
+		if ((int)ft_strlen(line) != length_line)
 			ft_exit("Map error: the lines are not equal in length\n", 1);
 		height++;
 		free(line);
@@ -55,7 +54,6 @@ void	ft_check_tiles(int fd, t_game **game)
 {
 	char	*line;
 	int		height;
-	int		width;
 
 	height = 0;
 	while (1)

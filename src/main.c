@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 14:31:07 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:10:11 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 	game->player = ft_calloc(1, sizeof(t_player));
 	mapn = argv[1];
 	game->moved = 0;
-	ft_check_map_size(mapn, &game, open(mapn, O_RDONLY));
+	ft_check_map_size(&game, open(mapn, O_RDONLY));
 	ft_check_tiles(open(mapn, O_RDONLY), &game);
 	ft_check_tiles_value(open(mapn, O_RDONLY), game);
 	game->title = "Le chien marin";

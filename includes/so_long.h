@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/04/19 16:09:53 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:37:21 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,27 @@ void				ft_exit(char *message, int error);
 /* This function add a new node to the tiles node. */
 void				add_decors(t_game *game, int x, int y, char type);
 /* Check the map if it is valid of not valid == 1. */
-int					ft_check_map_size(t_game **game, int fd);
+int					ft_check_map_size(t_game *game, int fd);
 /* Checks map name correct extension. .ber */
 int					ft_check_name(char *map);
 /* This function checks for the map values to see if they are right. */
-void				ft_check_tiles(int fd, t_game **game);
+void				ft_check_tiles(int fd, t_game *game);
 /* check a single line. */
 int					ft_check_line(char *line, char check, int all);
 /* check the value of all characters in the map. (COLLECTIBLES, EXITS,
 		PLAYERS) */
 void				ft_check_tiles_value(int fd, t_game *game);
 /* This function convert the map into a char table. */
-char				**ft_convert_map(int fd, t_game **game);
+char				**ft_convert_map(int fd, t_game *game);
 /* This function create the decors of the map. (walls, background, chest ,
 		player, exits) */
-void				ft_create_decors(t_tile **tiles, t_game **game, char **map);
+void				ft_create_decors(t_tile **tiles, t_game *game, char **map);
 /* ... */
-void				ft_move_player(t_game **game, int modifierx, int modifiery);
+void				ft_move_player(t_game *game, int modifierx, int modifiery);
 /* flood fill recursive function. */
 void				ft_flood_init(char **map, t_game *game);
 /* Check player movement for colisions. */
-int					ft_check_moving_point(t_game **game, int x, int y);
+int					ft_check_moving_point(t_game *game, int x, int y);
 /* Delete a tile. */
 void				ft_delete_tile(t_tile *tile, int x, int y, char type);
 /* Free a 2d array. */

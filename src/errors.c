@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:22:00 by mick              #+#    #+#             */
-/*   Updated: 2023/02/27 14:30:42 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:45:15 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_exit_free(t_game *game, char *string)
 		current = follow;
 	}
 	game->player = ft_free(game->player);
-	game = ft_free(game);
 	ft_exit(string, 0);
 }
 

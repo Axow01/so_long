@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/04/19 16:11:48 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:40:55 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_name(char *map)
 	return (1);
 }
 
-int	ft_check_map_size(t_game **game, int fd)
+int	ft_check_map_size(t_game *game, int fd)
 {
 	char	*line;
 	int		length_line;
@@ -42,15 +42,15 @@ int	ft_check_map_size(t_game **game, int fd)
 		height++;
 		free(line);
 	}
-	(*game)->width = (length_line - 1) * 100;
-	(*game)->height = height * 100;
+	game->width = (length_line - 1) * 100;
+	game->height = height * 100;
 	close(fd);
-	if ((*game)->height > 1300 || (*game)->width > 2500)
+	if (game->height > 1300 || game->width > 2500)
 		ft_exit("Map error: width or height to big.", 1);
 	return (1);
 }
 
-void	ft_check_tiles(int fd, t_game **game)
+void	ft_check_tiles(int fd, t_game *game)
 {
 	char	*line;
 	int		height;
@@ -61,7 +61,7 @@ void	ft_check_tiles(int fd, t_game **game)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (height == 0 || height == ((*game)->height / 100) - 1)
+		if (height == 0 || height == (game->height / 100) - 1)
 		{
 			if (!ft_check_line(line, '1', 1))
 				ft_exit("Map error: first and last line wrong.", 1);
@@ -123,5 +123,5 @@ void	ft_check_tiles_value(int fd, t_game *game)
 	close(fd);
 	if (exit != 1 || game->collected_c < 1 || player != 1)
 		ft_exit("Map error: to much player, exits or not enough collectibles.",
-			1);
+				1);
 }

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:41:06 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/04/19 16:12:20 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:39:57 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_sprites(t_game *game)
 			&x, &y);
 }
 
-char	**ft_convert_map(int fd, t_game **game)
+char	**ft_convert_map(int fd, t_game *game)
 {
 	char	**map;
 	char	*line;
@@ -34,9 +34,9 @@ char	**ft_convert_map(int fd, t_game **game)
 
 	row = 0;
 	col = 0;
-	map = (char **)ft_calloc((*game)->height / 100, sizeof(char *));
-	while (col < (*game)->height / 100)
-		map[col++] = ft_calloc((*game)->width / 100, sizeof(char));
+	map = (char **)ft_calloc(game->height / 100, sizeof(char *));
+	while (col < game->height / 100)
+		map[col++] = ft_calloc(game->width / 100, sizeof(char));
 	col = -1;
 	while (1)
 	{
@@ -53,7 +53,7 @@ char	**ft_convert_map(int fd, t_game **game)
 	return (map);
 }
 
-void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
+void	ft_create_decors(t_tile **tiles, t_game *game, char **map)
 {
 	int	row;
 	int	col;
@@ -61,12 +61,12 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 	row = 0;
 	col = 0;
 	(void)tiles;
-	ft_init_sprites((*game));
-	while (row < (*game)->height / 100)
+	ft_init_sprites(game);
+	while (row < game->height / 100)
 	{
 		while (map[row][col])
 		{
-			ft_check_tile_type(*game, col, row, map);
+			ft_check_tile_type(game, col, row, map);
 			col++;
 		}
 		col = 0;
@@ -74,15 +74,15 @@ void	ft_create_decors(t_tile **tiles, t_game **game, char **map)
 	}
 }
 
-void	ft_move_player(t_game **game, int modifierx, int modifiery)
+void	ft_move_player(t_game *game, int modifierx, int modifiery)
 {
-	if (ft_check_moving_point(game, (*game)->player->x + modifierx,
-			(*game)->player->y + modifiery))
+	if (ft_check_moving_point(game, game->player->x + modifierx,
+			game->player->y + modifiery))
 		return ;
-	(*game)->player->x += modifierx;
-	(*game)->player->y += modifiery;
-	(*game)->moved += 1;
-	ft_printf("Player moves: %d\n", (*game)->moved);
+	game->player->x += modifierx;
+	game->player->y += modifiery;
+	game->moved += 1;
+	ft_printf("Player moves: %d\n", game->moved);
 }
 
 void	ft_free_darray(char **array, int height)

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:20:30 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/02/27 10:54:00 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:41:14 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ void	ft_flood_init(char **map, t_game *game)
 		ft_exit("Flood fill error this map is not playable.", 1);
 }
 
-int	ft_check_moving_point(t_game **game, int x, int y)
+int	ft_check_moving_point(t_game *game, int x, int y)
 {
 	t_tile	*current;
 
-	current = (*game)->decors;
+	current = game->decors;
 	while (current->next)
 	{
 		if (current->x == x && current->y == y && (current->type == '1'
 				|| current->type == 'C' || (current->type == 'E'
-					&& (*game)->collected_c == 0)))
+					&& game->collected_c == 0)))
 		{
 			if (current->type == 'C')
 			{
-				(*game)->collected_c--;
-				ft_delete_tile((*game)->decors, x, y, 'C');
+				game->collected_c--;
+				ft_delete_tile(game->decors, x, y, 'C');
 				return (0);
 			}
-			else if (current->type == 'E' && (*game)->collected_c == 0)
-				ft_exit_free(*game, "GG, you won the game. Nice work !");
+			else if (current->type == 'E' && game->collected_c == 0)
+				ft_exit_free(game, "GG, you won the game. Nice work !");
 			return (1);
 		}
 		current = current->next;

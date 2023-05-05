@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/04/19 16:10:11 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/05 02:54:14 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ void	place_decor(t_tile *decs, t_game *valeur)
 
 int	key_pressed(int keycode, t_game *game)
 {
-	int	modifier;
-
-	modifier = 100;
 	mlx_clear_window(game->mlx, game->win);
 	place_decor(game->decors, game);
 	if (keycode == 2 || keycode == 124)
@@ -98,7 +95,7 @@ int	main(int argc, char **argv)
 	ft_init_map(game, mapn);
 	mlx_loop_hook(game->mlx, ft_renderer, &game);
 	mlx_hook(game->win, 2, 0, key_pressed, game);
-	mlx_hook(game->win, 17, 1L << 2, ft_quitt, game);
+	mlx_hook(game->win, 17, 0, ft_quitt, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

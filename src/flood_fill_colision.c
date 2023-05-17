@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:20:30 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/05 13:41:14 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:41:58 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_flood_fill(char **map, int x, int y, t_game *game)
 {
+	if (y > game->height / 100 - 1)
+		return ;
 	if ((map[y][x] == '1' || map[y][x] == '2') || y < 0 || x < 0)
 		return ;
 	if (map[y][x] == 'C')
@@ -32,6 +34,7 @@ void	ft_flood_init(char **map, t_game *game)
 {
 	game->c_count = 0;
 	game->e_count = 0;
+	(void)map;
 	ft_flood_fill(map, game->player->x / 100, game->player->y / 100, game);
 	if (game->c_count < 1 || game->e_count != 1)
 		ft_exit("Flood fill error this map is not playable.", 1);

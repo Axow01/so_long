@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:46:50 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/05 13:43:30 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:36:14 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_init_map(t_game *game, char *mapn)
 {
 	char	**map;
 
+	if (!game->mlx || !game->win)
+		ft_quitt(game);
 	map = ft_convert_map(open(mapn, O_RDONLY), game);
 	ft_create_decors(&game->decors, game, map);
 	ft_flood_init(map, game);

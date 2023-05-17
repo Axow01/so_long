@@ -1,43 +1,65 @@
+#--- DEFAULT VALUES ---#
+
+NAME = so_long
 
 SRC = src/main.c src/map_functions.c src/basic_function.c \
 	src/flood_fill_colision.c src/errors.c src/utils.c
 
-OBJ = $(patsubst src/%.c,bin/%.o,$(SRC))
-
-NAME = so_long
+OBJS = $(patsubst src/%.c, bin/%.o, $(SRC))
 
 CC = gcc
 
-LIBD = includes/libft/
-LIB = libft.a
+CFLAGS = -Wall -Wextra -Werror
+
+LIBFTPATH = includes/libft/
+
+LIBFT = libft.a
 
 MLX = libmlx.a
+
 MLXPATH = includes/mlx/
 
-CFLAGS = -Werror -Wall -Wextra
+#---   RULES   ---#
 
+all: $(NAME) logo
 
-all: ${LIBD}${LIB} ${NAME}
+$(NAME): $(OBJS) $(LIBFTPATH)$(LIBFT) $(MLXPATH)$(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFTPATH) -lft $(MLXPATH)$(MLX) -framework OpenGL -framework AppKit -Imlx -o $(NAME)
 
-${LIBD}${LIB}:
-	${MAKE} -C ${LIBD}
-	${MAKE} -C ${LIBD} bonus
-
-${NAME}: ${OBJ} ${MLXPATH}${MLX}
-		${CC} $(CFLAGS) -g ${MLXPATH}${MLX} ${OBJ} ${LIBD}${LIB} -framework OpenGL -framework AppKit -Imlx -o ${NAME}
-
-${MLXPATH}${MLX}:
-		${MAKE} -C ${MLXPATH}
 bin/%.o: src/%.c
 	@mkdir -p bin/
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
+$(MLXPATH)$(MLX):
+	@$(MAKE) -C $(MLXPATH)
+
+$(LIBFTPATH)$(LIBFT):
+	@$(MAKE) -C $(LIBFTPATH)
+	@$(MAKE) -C $(LIBFTPATH) bonus
 
 clean:
 	@rm -rf bin/
-	${MAKE} -C ${LIBD} fclean
+	@$(MAKE) -C $(LIBFTPATH) clean
 
 fclean: clean
-	${MAKE} -C ${MLXPATH} clean
-	@rm -f ${OBJ} ${NAME}
+	@rm $(NAME)
+	@$(MAKE) -C $(MLXPATH) clean
+	@$(MAKE) -C $(LIBFTPATH) fclean
+
+bonus: all
 
 re: fclean all
+
+logo:
+	@echo "\033[32;1m--- BUILD COMPLETE ---"
+	@echo "███▄ ▄███▓ ███▄ ▄███▓ ▄▄▄       ██▀███   ▄████▄   ▒█████  ▄▄▄█████▓▄▄▄█████▓"
+	@echo "▓██▒▀█▀ ██▒▓██▒▀█▀ ██▒▒████▄    ▓██ ▒ ██▒▒██▀ ▀█  ▒██▒  ██▒▓  ██▒ ▓▒▓  ██▒ ▓▒"
+	@echo "▓██    ▓██░▓██    ▓██░▒██  ▀█▄  ▓██ ░▄█ ▒▒▓█    ▄ ▒██░  ██▒▒ ▓██░ ▒░▒ ▓██░ ▒░"
+	@echo "▒██    ▒██ ▒██    ▒██ ░██▄▄▄▄██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒▒██   ██░░ ▓██▓ ░ ░ ▓██▓ ░ "
+	@echo "▒██▒   ░██▒▒██▒   ░██▒ ▓█   ▓██▒░██▓ ▒██▒▒ ▓███▀ ░░ ████▓▒░  ▒██▒ ░   ▒██▒ ░ "
+	@echo "░ ▒░   ░  ░░ ▒░   ░  ░ ▒▒   ▓▒█░░ ▒▓ ░▒▓░░ ░▒ ▒  ░░ ▒░▒░▒░   ▒ ░░     ▒ ░░   "
+	@echo "░  ░      ░░  ░      ░  ▒   ▒▒ ░  ░▒ ░ ▒░  ░  ▒     ░ ▒ ▒░     ░        ░    "
+	@echo "░      ░   ░      ░     ░   ▒     ░░   ░ ░        ░ ░ ░ ▒    ░        ░      "
+	@echo "       ░          ░         ░  ░   ░     ░ ░          ░ ░                    "
+	@echo "                                         ░                                   \033[0m"
+

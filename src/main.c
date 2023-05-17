@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:00:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/05 13:43:03 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:38:19 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,16 @@ int	main(int argc, char **argv)
 			1);
 	game.decors = ft_calloc(1, sizeof(t_tile));
 	game.player = ft_calloc(1, sizeof(t_player));
+	if (!game.decors || !game.player)
+		ft_quitt(&game);
 	mapn = argv[1];
 	game.moved = 0;
 	ft_check_map_size(&game, open(mapn, O_RDONLY));
 	ft_check_tiles(open(mapn, O_RDONLY), &game);
 	ft_check_tiles_value(open(mapn, O_RDONLY), &game);
-	game.title = "Le chien marin";
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, game.width, game.height, game.title);
+	game.win = mlx_new_window(game.mlx, game.width, game.height,
+			"Le chien marin !");
 	ft_init_map(&game, mapn);
 	mlx_loop_hook(game.mlx, ft_renderer, &game);
 	mlx_hook(game.win, 2, 0, key_pressed, &game);

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/05 13:40:55 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:39:06 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ void	ft_check_tiles_value(int fd, t_game *game)
 	close(fd);
 	if (exit != 1 || game->collected_c < 1 || player != 1)
 		ft_exit("Map error: to much player, exits or not enough collectibles.",
-				1);
+			1);
 }

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:04:00 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/17 19:42:43 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:07:09 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_check_tiles(int fd, t_game *game)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		printf("Height: %d Game height: %d\n", height, (game->height / 100) - 1);
 		if (height == 0 || height == (game->height / 100) - 1)
 		{
 			if (!ft_check_line(line, '1', 1))
